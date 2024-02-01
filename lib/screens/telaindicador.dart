@@ -6,18 +6,11 @@ import 'package:flutter_datachamp/widgets/grafic_widget.dart';
 import "package:intl/intl.dart";
 
 
-class IndicadorScreen extends StatefulWidget {
-  const IndicadorScreen({super.key});
+class IndicadorScreen extends StatefulWidget { 
+  const IndicadorScreen({Key? key}) : super(key: key);
 
-  // ignore: library_private_types_in_public_api
-  _IndicadorScreenState createstate() => _IndicadorScreenState();
-  
   @override
-  // ignore: no_logic_in_create_state
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
+  _IndicadorScreenState createState() => _IndicadorScreenState();
 }
 
 class _IndicadorScreenState extends State<IndicadorScreen>{
@@ -33,7 +26,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
 
   Indicador? selectedIndicador;
 
-  String selectedIndicadorMessage = 'selecione um indicador';
+  String selectedIndicadorMessage = 'Selecione um Indicador';
 
   Map<Indicador, List<Cotacao>> grupoCotacoesIndicador(List<Cotacao> cotacoes){
     Map<Indicador, List<Cotacao>> grupoIndicador = {};
@@ -159,10 +152,18 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue,
+          backgroundColor: const Color.fromARGB(255, 80, 20, 90),
           title: _currentIndex == 0
-              ? const Text('Cadastro de Indicadores', style: TextStyle(color: Colors.white))
-              : const Text('Cadastro de Cotações', style: TextStyle(color: Colors.white)),
+              ? const Text('Cadastro de Indicadores', style: TextStyle(
+                color: Colors.white,
+                fontSize: 40.0,
+              ))
+              : const Text('Cadastro de Cotações', style: TextStyle(
+                color: Colors.white,
+                fontSize: 40.0,
+              )),
+
+
           bottom: TabBar(
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white,
@@ -194,7 +195,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
         Expanded(
           child: indicadores.isEmpty
               ? Center(
-                  child: Text('Sua Lista de Indicadores esta vazia',
+                  child: Text('Sua Lista de Indicadores está vazia',
                       style: TextStyle(color: Colors.grey.shade600)),
             )
           : ListView.builder(
@@ -234,7 +235,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
                 _showAddIndicadorDialog();            
               },
               child: const Text('Adicionar um novo Indicador',
-                  style: TextStyle(color: Colors.blue)),
+                  style: TextStyle(color: Colors.purple)),
             ),
           ),
         ),
@@ -248,7 +249,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
         Expanded(
           child: cotacoes.isEmpty
           ? Center(
-              child: Text('Sua lista de cotacoes esta vazia',
+              child: Text('Sua lista de cotações esta vazia',
                 style: TextStyle(color: Colors.grey.shade600)),
             )
           : ListView.builder(
@@ -270,7 +271,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Checkbox(
-                        activeColor: Colors.blue,
+                        activeColor: Colors.purple,
                         value: cotacoes[index].isSelected,
                         onChanged: (value) {
                           setState(() {
@@ -302,16 +303,16 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
                       onPressed: () {
                         _showAddCotacaoDialog();
                       },
-                      child: const Text('Registrar Cotacao',
-                          style: TextStyle(color: Colors.blue)),
+                      child: const Text('Registrar Cotação',
+                          style: TextStyle(color: Colors.purple)),
                     ),
                     const SizedBox(height: 8),
                     ElevatedButton(
                       onPressed: () {
                         _showChar(context);
                       },
-                      child: const Text('Gerar Grafico',
-                          style: TextStyle(color: Colors.blue)),
+                      child: const Text('Gerar Gráfico',
+                          style: TextStyle(color: Colors.purple)),
                     ),
                   ],
                 ),
@@ -328,12 +329,12 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Adicionar um novo indicador',
-                style: TextStyle(color: Colors.blue)),
+                style: TextStyle(color: Colors.purple)),
             content: TextField(
               controller: descricaoController,
               cursorColor: Colors.grey,
               decoration: InputDecoration(
-                labelText: 'Descricao do indicador',
+                labelText: 'Descrição do indicador',
                 labelStyle: TextStyle(color: Colors.grey.shade600),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey.shade600),
@@ -345,14 +346,14 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('Cancelar', style: TextStyle(color: Colors.blue)),
+                child: const Text('Cancelar', style: TextStyle(color: Colors.purple)),
                 onPressed: () {
                   Navigator.of(context).pop();
                   descricaoController.clear();
                 },
               ),
               TextButton(
-                child: const Text('Adicionar', style: TextStyle(color: Colors.blue)),
+                child: const Text('Adicionar', style: TextStyle(color: Colors.purple)),
                 onPressed: () {
                   addIndicador();
                   Navigator.of(context).pop();
@@ -370,8 +371,8 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
           return StatefulBuilder(
             builder: (BuildContext context, setState) {
               return AlertDialog(
-                title: const Text('Registrar Cotacao',
-                    style:  TextStyle(color: Colors.blue)),
+                title: const Text('Registrar Cotação',
+                    style:  TextStyle(color: Colors.purple)),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -411,7 +412,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
                               keyboardType:
                               const TextInputType.numberWithOptions(decimal: true),
                           decoration: InputDecoration(
-                            labelText: 'Valor da cotacao',
+                            labelText: 'Valor da cotação',
                             labelStyle:
                                 TextStyle(color: Colors.grey.shade600),
                             border: OutlineInputBorder(
@@ -431,7 +432,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancelar', style: TextStyle(color: Colors.blue)),
+              child: const Text('Cancelar', style: TextStyle(color: Colors.purple)),
               onPressed: () {
                 Navigator.of(context).pop();
                 selectedIndicador = null;
@@ -440,7 +441,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
             ),
             TextButton(
               child: 
-                  const Text('Registrar', style: TextStyle(color: Colors.blue)),
+                  const Text('Registrar', style: TextStyle(color: Colors.purple)),
                   onPressed: () {
                     if (selectedIndicador != null) {
                       addCotacao();
@@ -510,12 +511,12 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
       builder: (BuildContext context) {
         return AlertDialog(
           title:
-              const Text('Modicar Indicador', style: TextStyle(color: Colors.blue)),
+              const Text('Modicar Indicador', style: TextStyle(color: Colors.purple)),
           content: TextField(
             controller: descricaoController,
             cursorColor: Colors.grey.shade600,
             decoration: InputDecoration(
-              labelText: 'Nova descricao do Indicador',
+              labelText: 'Nova descrição do Indicador',
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey.shade600),
               ),
@@ -523,7 +524,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancelar', style: TextStyle(color:Colors.blue)),
+              child: const Text('Cancelar', style: TextStyle(color:Colors.purple)),
               onPressed: () {
                 setState(() {
                   indicadores[index].descricao = descricaoController.text;
@@ -565,7 +566,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
             ),
             actions: <Widget> [
               TextButton(
-                child: const Text("Fechar", style: TextStyle(color: Colors.blue)),
+                child: const Text("Fechar", style: TextStyle(color: Colors.purple)),
                 onPressed: () {
                   Navigator.of(context).pop();
                 }),
@@ -582,7 +583,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Gráfico de Cotacoes - $indicatorNames"),
+            title: Text("Gráfico de Cotação - $indicatorNames"),
             content: SizedBox(
               width: 1600,
               height: 800,
@@ -591,7 +592,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
             ),
             actions: <Widget> [
               TextButton(
-                child: const Text("Fechar", style: TextStyle(color: Colors.blue)),
+                child: const Text("Fechar", style: TextStyle(color: Colors.purple)),
                 onPressed: () {
                   Navigator.of(context).pop();
                 })
@@ -605,7 +606,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-                  "Gráfico de Cotacoes - ${selectedIndicadores[0].descricao}, ${selectedIndicadores[1].descricao} e ${selectedIndicadores[2].descricao}"),
+                  "Gráfico de Cotações - ${selectedIndicadores[0].descricao}, ${selectedIndicadores[1].descricao} e ${selectedIndicadores[2].descricao}"),
             content: SizedBox(
               width: 1600,
               height: 800,
@@ -628,7 +629,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              "Gráfico de Cotaçoes - ${selectedIndicadores[0].descricao}, ${selectedIndicadores[1].descricao}, ${selectedIndicadores[2].descricao}, ${selectedIndicadores[3].descricao} "),
+              "Gráfico de Cotações - ${selectedIndicadores[0].descricao}, ${selectedIndicadores[1].descricao}, ${selectedIndicadores[2].descricao}, ${selectedIndicadores[3].descricao} "),
             content: SizedBox(
               width: 1600,
               height: 800,
@@ -651,7 +652,7 @@ class _IndicadorScreenState extends State<IndicadorScreen>{
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              "Gráfico de Cotacoes - ${selectedIndicadores[1].descricao}, ${selectedIndicadores[2].descricao}, ${selectedIndicadores[3].descricao}, ${selectedIndicadores[4].descricao}, ${selectedIndicadores[4].descricao} "),
+              "Gráfico de Cotações - ${selectedIndicadores[1].descricao}, ${selectedIndicadores[2].descricao}, ${selectedIndicadores[3].descricao}, ${selectedIndicadores[4].descricao}, ${selectedIndicadores[4].descricao} "),
             content: SizedBox(
               width: 1600,
               height: 800,
